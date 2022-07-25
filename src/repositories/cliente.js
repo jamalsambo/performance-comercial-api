@@ -20,7 +20,7 @@ exports.listar = (callback, callbackError) => {
 
 // inicio da busca de faturas por cliente
 exports.faturas = (data_inical, data_final, cliente, callback, callbackError) => {
-        const query = `SELECT  
+        const query = `SELECT   
                                 cao_os.co_os,
                                 cao_cliente.co_cliente,
                                 cao_cliente.no_razao,

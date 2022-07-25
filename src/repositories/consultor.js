@@ -5,7 +5,7 @@ var database = require('../db/db_conexao.js');
 
 // inicio da busca de todos consultores
 exports.listar = (callback, callbackError) => {
-        const query = `SELECT * FROM avalicao_agencia.cao_usuario join permissao_sistema on cao_usuario.co_usuario = permissao_sistema.co_usuario`
+        const query = `SELECT * FROM avalicao_agencia.cao_usuario inner join permissao_sistema  on cao_usuario.co_usuario = permissao_sistema.co_usuario  where permissao_sistema.co_sistema=1 and in_ativo='s' and  co_tipo_usuario BETWEEN '0' AND '2'`
 
         database.query(query, (err, result) => {
                 if (err) {

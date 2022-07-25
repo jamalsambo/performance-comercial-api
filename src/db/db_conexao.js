@@ -2,10 +2,10 @@
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-	host : 'localhost',
-	database : 'avalicao_agencia',
-	user : 'root',
-	password : '',
+	host : 'mocha3033.mochahost.com',
+	database : 'sbcimove_avaliacao_agencia',
+	user : 'sbcimove_jamal',
+	password : 'p$AM5wZP(6EB',
 	port: 3306
 });
 

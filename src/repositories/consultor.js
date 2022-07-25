@@ -24,8 +24,10 @@ exports.faturas = (data_inical, data_final, consultor, callback, callbackError) 
                                 cao_os.co_os,
                                 cao_fatura.co_os, 
                                 cao_fatura.data_emissao, 
-                                sum(cao_fatura.valor) as receita, 
-                                sum(cao_fatura.comissao_cn) as comissa,
+                                sum((cao_fatura.valor*cao_fatura.comissao_cn)/100) as comissa,                                
+                                sum(cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) as receita,
+                                sum((cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) - (cao_salario.brut_salario + (cao_fatura.valor*cao_fatura.comissao_cn)/100))
+                                as lucro,          
                                 DATE_FORMAT(cao_fatura.data_emissao, '%M, %Y') as mes,
                                 cao_usuario.co_usuario,
                                 cao_usuario.no_usuario, 

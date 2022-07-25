@@ -2,11 +2,11 @@
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-	host : 'mocha3033.mochahost.com',
-	database : 'sbcimove_avaliacao_agencia',
-	user : 'sbcimove_jamal',
-	password : 'p$AM5wZP(6EB',
-	port: 3306
+	host : 'mysql741.umbler.com',
+	database : 'avalicao_agencia',
+	user : 'jamal',
+	password : 'Iu3G914p4fUa',
+	port: 41890
 });
 
 connection.connect(function(error){

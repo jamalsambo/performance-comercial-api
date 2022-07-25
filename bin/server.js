@@ -44,7 +44,7 @@ function onError(error) {
     const bind = typeof port === 'string' ?
         'Pipe ' + port :
         'Port ' + port;
-    
+
     switch (error.code) {
         case 'EACCES':
             console.error(bind + 'requires elevated privileges');
@@ -57,7 +57,7 @@ function onError(error) {
         default:
             throw error;
     }
-    
+
 }
 // fim da funcao para o erro de servidor
 
@@ -65,8 +65,8 @@ function onError(error) {
 function onListening() {
     const addr = server.address();
     const bind = typeof addr === 'string'
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }
 // fim da funcao de debung

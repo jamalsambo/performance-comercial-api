@@ -6,7 +6,7 @@ var database = require('../db/db_conexao.js');
 
 // inicio da busca de todos clientes
 exports.listar = (callback, callbackError) => {
-        const query = `SELECT * FROM avalicao_agencia.cao_cliente`
+        const query = `SELECT * FROM avalicao_agencia.cao_cliente where tp_cliente='A'`
 
         database.query(query, (err, result) => {
                 if (err) {

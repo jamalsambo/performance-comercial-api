@@ -24,7 +24,7 @@ exports.faturas = (data_inical, data_final, cliente, callback, callbackError) =>
                                 cao_os.co_os,
                                 cao_cliente.co_cliente,
                                 cao_cliente.no_razao,
-                                sum(cao_fatura.valor) as receita, 
+                                sum(cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) as receita, 
                                 sum(cao_fatura.comissao_cn) as comissao,
                                 DATE_FORMAT(cao_fatura.data_emissao, '%M, %Y') as mes
                                 from avalicao_agencia.cao_os

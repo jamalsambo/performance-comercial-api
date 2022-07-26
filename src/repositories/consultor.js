@@ -37,7 +37,7 @@ exports.faturas = (data_inical, data_final, consultor, callback, callbackError) 
                                 inner join cao_usuario on cao_os.co_usuario = cao_usuario.co_usuario 
                                 inner join cao_salario on cao_usuario.co_usuario = cao_salario.co_usuario 
                                 where cao_usuario.co_usuario in (?) and data_emissao BETWEEN '${data_inical}' AND '${data_final}' 
-                        GROUP BY co_usuario,mes ORDER BY data_emissao`
+                        GROUP BY mes ORDER BY data_emissao`
         database.query(query, [consultor], (err, result) => {
                 if (err) {
                         callbackError(err)

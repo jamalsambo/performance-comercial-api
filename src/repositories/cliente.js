@@ -28,12 +28,12 @@ exports.faturas = (data_inical, data_final, cliente, callback, callbackError) =>
                                 sum(cao_fatura.comissao_cn) as comissao,
                                 DATE_FORMAT(cao_fatura.data_emissao, '%M, %Y') as mes
                                 from avalicao_agencia.cao_os
-                                inner join cao_fatura on cao_os.co_os = cao_fatura.co_os
+                                left join cao_fatura on cao_os.co_os = cao_fatura.co_os
                                 inner join cao_cliente on cao_fatura.co_cliente = cao_cliente.co_cliente
                                  where  cao_cliente.co_cliente in (?) and
                                  data_emissao BETWEEN '${data_inical}' AND '${data_final}' 
                                
-                                GROUP BY mes ORDER BY data_emissao`;
+                        GROUP BY co_cliente,mes ORDER BY data_emissao`;
         database.query(query, [cliente], (err, result) => {
                 if (err) {
                         callbackError(err)

@@ -33,7 +33,7 @@ exports.faturas = (data_inical, data_final, cliente, callback, callbackError) =>
                                  where  cao_cliente.co_cliente in (?) and
                                  data_emissao BETWEEN '${data_inical}' AND '${data_final}' 
                                
-                                GROUP BY data_emissao ORDER BY data_emissao`;
+                                GROUP BY co_cliente,data_emissao ORDER BY data_emissao`;
         database.query(query, [cliente], (err, result) => {
                 if (err) {
                         callbackError(err)

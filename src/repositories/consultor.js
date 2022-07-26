@@ -21,23 +21,23 @@ exports.listar = (callback, callbackError) => {
 // inicio da busca de faturas por consultor
 exports.faturas = (data_inical, data_final, consultor, callback, callbackError) => {
         const query = `SELECT  
-                                cao_os.co_os,
-                                cao_fatura.co_os, 
-                                cao_fatura.data_emissao, 
-                                sum((cao_fatura.valor*cao_fatura.comissao_cn)/100) as comissa,                                
-                                sum(cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) as receita,
-                                sum((cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) - (cao_salario.brut_salario + (cao_fatura.valor*cao_fatura.comissao_cn)/100))
-                                as lucro,          
-                                DATE_FORMAT(cao_fatura.data_emissao, '%M, %Y') as mes,
-                                cao_usuario.co_usuario,
-                                cao_usuario.no_usuario, 
-                                cao_salario.brut_salario
-                                FROM avalicao_agencia.cao_os 
-                                inner join cao_fatura on cao_os.co_os = cao_fatura.co_os 
-                                inner join cao_usuario on cao_os.co_usuario = cao_usuario.co_usuario 
-                                inner join cao_salario on cao_usuario.co_usuario = cao_salario.co_usuario 
-                                where cao_usuario.co_usuario in (?) and data_emissao BETWEEN '${data_inical}' AND '${data_final}' 
-                        GROUP BY mes ORDER BY data_emissao`
+        cao_os.co_os,
+        cao_fatura.co_os, 
+        cao_fatura.data_emissao, 
+        format(sum((cao_fatura.valor*cao_fatura.comissao_cn)/100), '#,#') as comissa,                                
+        format(sum(cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100), '#,#') as receita,
+        format(sum((cao_fatura.valor - (cao_fatura.valor*cao_fatura.total_imp_inc)/100) - (cao_salario.brut_salario + (cao_fatura.valor*cao_fatura.comissao_cn)/100)),'#,#')
+        as lucro,          
+        DATE_FORMAT(cao_fatura.data_emissao, '%M, %Y') as mes,
+        cao_usuario.co_usuario,
+        cao_usuario.no_usuario, 
+        cao_salario.brut_salario
+        FROM avalicao_agencia.cao_os 
+        left join cao_fatura on cao_os.co_os = cao_fatura.co_os 
+        inner join cao_usuario on cao_os.co_usuario = cao_usuario.co_usuario 
+        inner join cao_salario on cao_usuario.co_usuario = cao_salario.co_usuario 
+        where cao_usuario.co_usuario in (?) and data_emissao BETWEEN '${data_inical}' AND '${data_final}' 
+GROUP BY co_usuario, mes ORDER BY data_emissao`
         database.query(query, [consultor], (err, result) => {
                 if (err) {
                         callbackError(err)
